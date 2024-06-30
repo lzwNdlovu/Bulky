@@ -34,7 +34,7 @@ namespace BulkyWeb.Data
                 Price50 = 85,
                 Price100 = 80,
                 CategoryID = 1,
-                ImageUrl =""
+                ImageUrl = ""
 
             },
                 new Product
