@@ -1,5 +1,6 @@
 ﻿using BulkyWeb.Models;
 using BulkyWeb.Models.ViewModels;
+using BulkyWeb.Repository;
 using BulkyWeb.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,7 +21,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(IncludeProperties:"Category").ToList();
             //IEnumerable<SelectListItem>CategoryList = _unitOfWork.Category.GetAll()
             //    .Select(u => new SelectListItem
             //    {
@@ -33,7 +34,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         public IActionResult Upsert(int? id)
 
         {
-            ProductVM productVM = new()
+            ProductVM productVM = new ()
             {
 
                 CategoryList = _unitOfWork.Category.GetAll()
@@ -97,7 +98,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
                     {
                         file.CopyTo(fileStream);
                     }
-                    productVM.Product.ImageUrl = @"\image\product" + fileName;
+                    productVM.Product.ImageUrl = @"\image\product\" + fileName;
                 }
 
                 if (productVM.Product.Id == 0) 
@@ -127,8 +128,8 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
            
         }
-           
-        
+
+
         //public IActionResult Edit(int? id)
         //{
         //    if (id == null || id == 0)
@@ -165,9 +166,9 @@ namespace BulkyWeb.Areas.Admin.Controllers
             }
             return View();
 
-
         }
-        public IActionResult Delete(int? id)
+
+            public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
             {
@@ -207,6 +208,17 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
 
         }
+        #region API CALLS
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Product> objProductList = _unitOfWork.Product.GetAll(IncludeProperties: "Category").ToList();
+            return Json(new { data = objProductList });
+        }
+        #endregion
+
+
     }
 }
 
