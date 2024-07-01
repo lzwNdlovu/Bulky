@@ -1,16 +1,19 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BulkyWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/GooseWeb.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BulkyWeb.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css"  />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css"  />
+   
 </head>
 <body>
     <header>
@@ -65,14 +68,32 @@
             Made with<i class="bi bi-heart-fill"></i> By Khayenii Solutions
         </div>
     </footer>
-    <script src="https://cdn.tiny.cloud/1/frtttnchsjz6btdbt6ohtly60h1nxb82dzzd984p8iwd9tiz/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        });
+    </script>
+<textarea>
+  Welcome to TinyMCE!
+</textarea>
     <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js" asp-append-version="true"></script>
+
+    <script src="https://cdn.tiny.cloud/1/9d18qqx6b8o6tzyo2rta6fxwnw6l5e1pg5yq5b4if0peg3ja/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
