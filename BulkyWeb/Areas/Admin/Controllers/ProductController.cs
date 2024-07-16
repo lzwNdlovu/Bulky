@@ -1,7 +1,9 @@
-﻿using BulkyWeb.Models;
-using BulkyWeb.Models.ViewModels;
+﻿using Bulky.Models.Models;
+using Bulky.Models.Models.ViewModels;
+using Bulky.Utility;
 using BulkyWeb.Repository;
 using BulkyWeb.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -10,6 +12,8 @@ namespace BulkyWeb.Areas.Admin.Controllers
 {
 
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
+
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -103,9 +107,9 @@ namespace BulkyWeb.Areas.Admin.Controllers
                     productVM.Product.ImageUrl = @"\images\product\" + fileName;
                 }
 
-                if (productVM.Product.Id == 0) 
-                { 
-                _unitOfWork.Product.Add(productVM.Product);
+                if (productVM.Product.Id == 0)
+                {
+                    _unitOfWork.Product.Add(productVM.Product);
 
                 }
                 else 

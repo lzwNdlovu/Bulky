@@ -1,5 +1,5 @@
-﻿using BulkyWeb.Data;
-using BulkyWeb.Models;
+﻿using Bulky.DataAccess.Data;
+using Bulky.Models.Models;
 using BulkyWeb.Repository.IRepository;
 
 namespace BulkyWeb.Repository

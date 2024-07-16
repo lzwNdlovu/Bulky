@@ -1,4 +1,4 @@
-﻿using BulkyWeb.Models;
+﻿using Bulky.Models.Models;
 
 namespace BulkyWeb.Repository.IRepository
 {
